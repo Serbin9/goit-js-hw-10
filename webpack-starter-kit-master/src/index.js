@@ -3,7 +3,8 @@ import './task-10.js';
 import './menu.hbs';
 import posts from './menu.json';
 import card from './menu.hbs';
-
+ 
+// шаблон ====================
 const menu = document.querySelector('.js-menu');
 function itemMenu(posts) {
   const murkup = posts.map(post => card(post)).join('');
@@ -19,17 +20,24 @@ const Theme = {
 //  положение бегунка смена темы через бегунок ================================
 const themClick = document.querySelector('.js-switch-input');
 const themBody = document.querySelector('body');
+// console.log(localStorage)
+
 themClick.addEventListener('change', changeThem);
+
 function changeThem(event) {
-  if (!themClick.checked) {
+  if(!localStorage){
+    themBody.classList.add(Theme.LIGHT);
+    localStorage.getItem('Theme', Theme.LIGHT);
+  }
+  else if (!themClick.checked) {
     themClick.checked = false;
-    themBody.classList.add('light-theme');
-    themBody.classList.remove('dark-theme');
-    localStorage.setItem('Theme', 'light-theme');
+    themBody.classList.add(Theme.LIGHT);
+    themBody.classList.remove(Theme.DARK);
+    localStorage.setItem('Theme', Theme.LIGHT);
   } else {
-    themBody.classList.remove('light-theme');
-    themBody.classList.add('dark-theme');
-    localStorage.setItem('Theme', 'dark-theme');
+    themBody.classList.remove(Theme.LIGHT);
+    themBody.classList.add(Theme.DARK);
+    localStorage.setItem('Theme', Theme.DARK);
   }
 }
 
@@ -42,3 +50,4 @@ function color() {
   }
 }
 color();
+// console.log(localStorage)
